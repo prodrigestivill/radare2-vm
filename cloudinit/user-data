@@ -1,0 +1,16 @@
+#cloud-config
+ssh_deletekeys: true
+ssh_genkeytypes: none
+password: radare2
+
+packages:
+ - snapd
+
+runcmd:
+  - snap install radare2 --classic
+  - rm -vrf /var/lib/snapd/cache/*
+  - apt-get clean
+  - fstrim -av
+
+power_state:
+  mode: poweroff
